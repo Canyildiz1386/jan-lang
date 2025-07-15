@@ -60,6 +60,8 @@ Jan is built for:
 * [ ] Standard Library
 * [ ] Package Manager
 * [ ] JIT Compilation (maybe?)
+* [ ] NLP + AI feautres (maybe?)
+
 
 
 ---
