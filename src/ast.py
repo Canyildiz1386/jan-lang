@@ -79,4 +79,8 @@ class FunctionCall(Expression):
 
 class ReturnStatement(Statement):
     def __init__(self, value):
-        self.value = value 
+        self.value = value
+
+class ExpressionStatement(Statement):
+    def __init__(self, expression):
+        self.expression = expression 

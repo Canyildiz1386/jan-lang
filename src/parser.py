@@ -44,16 +44,15 @@ class Parser:
                 self.expect(TokenType.SEMICOLON)
                 return Assignment(name, value)
             else:
-                return self.parse_expression_statement(Identifier(name))
+                expr = self.parse_expression_statement(Identifier(name))
+                self.expect(TokenType.SEMICOLON)
+                return expr
         else:
-            expr = self.parse_expression()
+            expr = self.parse_expression_statement(self.parse_expression())
             self.expect(TokenType.SEMICOLON)
-            return self.parse_expression_statement(expr)
+            return expr
     
     def parse_expression_statement(self, expr):
-        class ExpressionStatement(Statement):
-            def __init__(self, expression):
-                self.expression = expression
         return ExpressionStatement(expr)
     
     def parse_if_statement(self):

@@ -64,10 +64,15 @@ class Interpreter:
     
     def execute(self, stmt):
         if isinstance(stmt, ExpressionStatement):
-            self.evaluate(stmt.expression)
+            result = self.evaluate(stmt.expression)
+            if result is not None:
+                print(result)
         elif isinstance(stmt, Assignment):
             value = self.evaluate(stmt.value)
-            self.environment.assign(stmt.name, value)
+            try:
+                self.environment.assign(stmt.name, value)
+            except:
+                self.environment.define(stmt.name, value)
         elif isinstance(stmt, IfStatement):
             self.execute_if(stmt)
         elif isinstance(stmt, WhileStatement):
