@@ -15,13 +15,57 @@ Inspired by Python, reimagined for clarity and fun.
 
 ---
 
+## 🎯 Language Features
+
+### Variables & Assignment
+```jan
+x = 42;
+message = "Hello, World!";
+```
+
+### Arithmetic Operations
+```jan
+a = 10 + 5;
+b = 20 * 3;
+c = 100 / 4;
+```
+
+### Functions
+```jan
+fun greet(name) {
+    return "Hello, " + name + "!";
+}
+
+result = greet("Jan");
+```
+
+### Control Flow
+```jan
+if (x > 10) {
+    print("x is greater than 10");
+} else {
+    print("x is 10 or less");
+}
+
+while (i < 5) {
+    i = i + 1;
+}
+```
+
+### Comments
+```jan
+// This is a single-line comment
+x = 42; // Inline comment
+```
+
+---
 
 ## 💻 Getting Started
 
 1️⃣ **Clone the repo:**
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/jan-lang.git
+git clone https://github.com/Canyildiz1386/jan-lang.git
 ```
 
 2️⃣ **Install dependencies:**
@@ -33,10 +77,16 @@ pip install -r requirements.txt
 3️⃣ **Run Jan REPL:**
 
 ```bash
-python jan.py
+python3 jan.py
 ```
 
-4️⃣ **Enjoy! 🎉**
+4️⃣ **Run a Jan file:**
+
+```bash
+python3 jan.py examples/hello.jan
+```
+
+5️⃣ **Enjoy! 🎉**
 
 ---
 
@@ -53,14 +103,14 @@ Jan is built for:
 
 ## 🌟 Roadmap
 
-* [] Lexer & Parser
-* [] AST Interpreter
+* [x] Lexer & Parser
+* [x] AST Interpreter
 * [ ] Bytecode Compiler
 * [ ] Virtual Machine
 * [ ] Standard Library
 * [ ] Package Manager
 * [ ] JIT Compilation (maybe?)
-* [ ] NLP + AI feautres (maybe?)
+* [ ] NLP + AI features (maybe?)
 
 
 
