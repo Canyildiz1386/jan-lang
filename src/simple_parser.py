@@ -1,7 +1,7 @@
 from .tokens import TokenType
 from .ast import *
 
-class Parser:
+class SimpleParser:
     def __init__(self, lexer):
         self.lexer = lexer
         self.current_token = None
@@ -23,12 +23,6 @@ class Parser:
             self.position += 1
         else:
             self.current_token = Token(TokenType.EOF, None, 0, 0)
-    
-    def peek(self, offset=1):
-        peek_pos = self.position + offset - 1
-        if peek_pos < len(self.tokens):
-            return self.tokens[peek_pos]
-        return Token(TokenType.EOF, None, 0, 0)
     
     def expect(self, token_type):
         if self.current_token.type == token_type:
@@ -65,13 +59,10 @@ class Parser:
             elif self.current_token.type == TokenType.IDENTIFIER:
                 return self.parse_function_call_statement(name)
             else:
-                return self.parse_expression_statement(Identifier(name))
+                return ExpressionStatement(Identifier(name))
         else:
-            expr = self.parse_expression_statement(self.parse_expression())
-            return expr
-    
-    def parse_expression_statement(self, expr):
-        return ExpressionStatement(expr)
+            expr = self.parse_expression()
+            return ExpressionStatement(expr)
     
     def parse_if_statement(self):
         self.expect(TokenType.IF)
@@ -118,19 +109,29 @@ class Parser:
         initializer = self.parse_expression()
         return VariableDeclaration(name, initializer)
     
-    def parse_block(self):
-        self.expect(TokenType.LBRACE)
-        statements = []
-        while self.current_token.type != TokenType.RBRACE and self.current_token.type != TokenType.EOF:
-            statements.append(self.parse_statement())
-        self.expect(TokenType.RBRACE)
-        return Block(statements)
-    
     def parse_indented_block(self):
         statements = []
-        while self.current_token.type != TokenType.EOF and self.current_token.type != TokenType.RETURN:
+        while self.current_token.type != TokenType.EOF:
+            if self.current_token.type == TokenType.RETURN:
+                statements.append(self.parse_statement())
+                break
             statements.append(self.parse_statement())
         return IndentedBlock(statements)
+    
+    def parse_function_call_statement(self, name):
+        arguments = []
+        
+        if self.current_token.type == TokenType.IDENTIFIER:
+            arguments.append(Identifier(self.current_token.value))
+            self.next_token()
+        elif self.current_token.type == TokenType.STRING:
+            arguments.append(StringLiteral(self.current_token.value))
+            self.next_token()
+        elif self.current_token.type == TokenType.NUMBER:
+            arguments.append(NumberLiteral(self.current_token.value))
+            self.next_token()
+        
+        return ExpressionStatement(FunctionCall(Identifier(name), arguments))
     
     def parse_expression(self):
         return self.parse_or()
@@ -246,28 +247,4 @@ class Parser:
             return expr
         
         else:
-            raise Exception(f"Unexpected token: {self.current_token.type}")
-    
-    def parse_function_call_statement(self, name):
-        arguments = []
-        
-        if self.current_token.type == TokenType.IDENTIFIER:
-            arguments.append(Identifier(self.current_token.value))
-            self.next_token()
-            while self.current_token.type == TokenType.IDENTIFIER:
-                arguments.append(Identifier(self.current_token.value))
-                self.next_token()
-        
-        return self.parse_expression_statement(FunctionCall(Identifier(name), arguments))
-    
-    def parse_function_call(self, name):
-        arguments = []
-        
-        if self.current_token.type == TokenType.IDENTIFIER:
-            arguments.append(Identifier(self.current_token.value))
-            self.next_token()
-            while self.current_token.type == TokenType.IDENTIFIER:
-                arguments.append(Identifier(self.current_token.value))
-                self.next_token()
-        
-        return FunctionCall(Identifier(name), arguments) 
+            raise Exception(f"Unexpected token: {self.current_token.type}") 

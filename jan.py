@@ -3,7 +3,7 @@
 import sys
 from src.interpreter import Interpreter
 from src.lexer import Lexer
-from src.parser import Parser
+from src.simple_parser import SimpleParser
 
 def main():
     if len(sys.argv) > 1:
@@ -15,7 +15,7 @@ def main():
 
 def run(code):
     lexer = Lexer(code)
-    parser = Parser(lexer)
+    parser = SimpleParser(lexer)
     interpreter = Interpreter()
     ast = parser.parse()
     interpreter.interpret(ast)

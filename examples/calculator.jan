@@ -1,12 +1,12 @@
-a = 10;
-b = 5;
+var a = 10
+var b = 5
 
-sum = a + b;
-difference = a - b;
-product = a * b;
-quotient = a / b;
+var sum = a + b
+var difference = a - b
+var product = a * b
+var quotient = a / b
 
-sum;
-difference;
-product;
-quotient; 
+sum
+difference
+product
+quotient 

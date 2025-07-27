@@ -19,43 +19,40 @@ Inspired by Python, reimagined for clarity and fun.
 
 ### Variables & Assignment
 ```jan
-x = 42;
-message = "Hello, World!";
+var x = 42
+var message = "Hello, World!"
 ```
 
 ### Arithmetic Operations
 ```jan
-a = 10 + 5;
-b = 20 * 3;
-c = 100 / 4;
+var a = 10 + 5
+var b = 20 * 3
+var c = 100 / 4
 ```
 
 ### Functions
 ```jan
-fun greet(name) {
-    return "Hello, " + name + "!";
-}
+function greet name
+    return "Hello, " + name + "!"
 
-result = greet("Jan");
+var result = greet Jan
 ```
 
 ### Control Flow
 ```jan
-if (x > 10) {
-    print("x is greater than 10");
-} else {
-    print("x is 10 or less");
-}
+if x > 10
+    print "x is greater than 10"
+else
+    print "x is 10 or less"
 
-while (i < 5) {
-    i = i + 1;
-}
+while i < 5
+    i = i + 1
 ```
 
 ### Comments
 ```jan
 // This is a single-line comment
-x = 42; // Inline comment
+var x = 42 // Inline comment
 ```
 
 ---

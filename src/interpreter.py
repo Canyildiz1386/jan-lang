@@ -73,11 +73,16 @@ class Interpreter:
                 self.environment.assign(stmt.name, value)
             except:
                 self.environment.define(stmt.name, value)
+        elif isinstance(stmt, VariableDeclaration):
+            value = self.evaluate(stmt.initializer)
+            self.environment.define(stmt.name, value)
         elif isinstance(stmt, IfStatement):
             self.execute_if(stmt)
         elif isinstance(stmt, WhileStatement):
             self.execute_while(stmt)
         elif isinstance(stmt, Block):
+            self.execute_block(stmt.statements, Environment(self.environment))
+        elif isinstance(stmt, IndentedBlock):
             self.execute_block(stmt.statements, Environment(self.environment))
         elif isinstance(stmt, FunctionDeclaration):
             function = Function(stmt, self.environment)

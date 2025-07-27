@@ -72,6 +72,10 @@ class FunctionDeclaration(Statement):
         self.params = params
         self.body = body
 
+class IndentedBlock(Statement):
+    def __init__(self, statements):
+        self.statements = statements
+
 class FunctionCall(Expression):
     def __init__(self, callee, arguments):
         self.callee = callee
