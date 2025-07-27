@@ -1,5 +1,4 @@
-function greet name
-    return "Hello, " + name + "!"
-
-var message = greet World
-message 
+var x is 10
+var y is 20
+var result is x * y
+result 
