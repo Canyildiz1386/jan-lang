@@ -1,0 +1,6 @@
+fun greet(name) {
+    return "Hello, " + name + "!";
+}
+
+message = greet("World");
+message; 
