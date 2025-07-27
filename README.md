@@ -76,4 +76,4 @@ MIT License – do whatever you want, just keep the credits.
 
 Follow the project, star it ⭐, or reach out on [GitHub Issues](https://github.com/Canyildiz1386/jan-lang/issues)!
 
-Made with ❤️ by Jan.
+Made with ❤️ by Can Yildiz.
