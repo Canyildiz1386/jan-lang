@@ -9,6 +9,7 @@ class TokenType(Enum):
     MULTIPLY = auto()
     DIVIDE = auto()
     ASSIGN = auto()
+    IS = auto()
     LPAREN = auto()
     RPAREN = auto()
     LBRACE = auto()

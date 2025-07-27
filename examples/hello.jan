@@ -1,5 +1,5 @@
 function greet name
     return "Hello, " + name + "!"
 
-var message = greet World
+var message is greet "World"
 message 

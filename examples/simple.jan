@@ -1,4 +1,4 @@
-var x = 42
-var y = 10
-var result = x + y
+var x is 42
+var y is 10
+var result is x + y
 result 

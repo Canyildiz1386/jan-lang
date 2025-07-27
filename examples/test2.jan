@@ -1,4 +1,4 @@
-var x = 5
-var y = 3
-var z = x + y
+var x is 5
+var y is 3
+var z is x + y
 z 

@@ -56,8 +56,6 @@ class SimpleParser:
                 self.next_token()
                 value = self.parse_expression()
                 return Assignment(name, value)
-            elif self.current_token.type == TokenType.IDENTIFIER:
-                return self.parse_function_call_statement(name)
             else:
                 return ExpressionStatement(Identifier(name))
         else:
@@ -86,14 +84,12 @@ class SimpleParser:
         self.expect(TokenType.FUNCTION)
         name = self.expect(TokenType.IDENTIFIER).value
         
-        params = []
+        param = None
         if self.current_token.type == TokenType.IDENTIFIER:
-            params.append(self.expect(TokenType.IDENTIFIER).value)
-            while self.current_token.type == TokenType.IDENTIFIER:
-                params.append(self.expect(TokenType.IDENTIFIER).value)
+            param = self.expect(TokenType.IDENTIFIER).value
         
         body = self.parse_indented_block()
-        return FunctionDeclaration(name, params, body)
+        return FunctionDeclaration(name, [param] if param else [], body)
     
     def parse_return_statement(self):
         self.expect(TokenType.RETURN)
@@ -105,7 +101,7 @@ class SimpleParser:
     def parse_variable_declaration(self):
         self.expect(TokenType.VAR)
         name = self.expect(TokenType.IDENTIFIER).value
-        self.expect(TokenType.ASSIGN)
+        self.expect(TokenType.IS)
         initializer = self.parse_expression()
         return VariableDeclaration(name, initializer)
     
@@ -132,6 +128,21 @@ class SimpleParser:
             self.next_token()
         
         return ExpressionStatement(FunctionCall(Identifier(name), arguments))
+    
+    def parse_function_call(self, name):
+        arguments = []
+        
+        if self.current_token.type == TokenType.IDENTIFIER:
+            arguments.append(Identifier(self.current_token.value))
+            self.next_token()
+        elif self.current_token.type == TokenType.STRING:
+            arguments.append(StringLiteral(self.current_token.value))
+            self.next_token()
+        elif self.current_token.type == TokenType.NUMBER:
+            arguments.append(NumberLiteral(self.current_token.value))
+            self.next_token()
+        
+        return FunctionCall(Identifier(name), arguments)
     
     def parse_expression(self):
         return self.parse_or()
@@ -238,7 +249,11 @@ class SimpleParser:
         elif self.current_token.type == TokenType.IDENTIFIER:
             name = self.current_token.value
             self.next_token()
-            return Identifier(name)
+            
+            if self.current_token.type == TokenType.IDENTIFIER:
+                return self.parse_function_call(name)
+            else:
+                return Identifier(name)
         
         elif self.current_token.type == TokenType.LPAREN:
             self.next_token()

@@ -16,6 +16,7 @@ class Lexer:
             'function': TokenType.FUNCTION,
             'return': TokenType.RETURN,
             'var': TokenType.VAR,
+            'is': TokenType.IS,
             'true': TokenType.TRUE,
             'false': TokenType.FALSE,
             'nil': TokenType.NIL,

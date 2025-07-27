@@ -19,15 +19,15 @@ Inspired by Python, reimagined for clarity and fun.
 
 ### Variables & Assignment
 ```jan
-var x = 42
-var message = "Hello, World!"
+var x is 42
+var message is "Hello, World!"
 ```
 
 ### Arithmetic Operations
 ```jan
-var a = 10 + 5
-var b = 20 * 3
-var c = 100 / 4
+var a is 10 + 5
+var b is 20 * 3
+var c is 100 / 4
 ```
 
 ### Functions
@@ -35,7 +35,7 @@ var c = 100 / 4
 function greet name
     return "Hello, " + name + "!"
 
-var result = greet Jan
+var result is greet Jan
 ```
 
 ### Control Flow
@@ -46,13 +46,13 @@ else
     print "x is 10 or less"
 
 while i < 5
-    i = i + 1
+    i is i + 1
 ```
 
 ### Comments
 ```jan
 // This is a single-line comment
-var x = 42 // Inline comment
+var x is 42 // Inline comment
 ```
 
 ---
